@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css">
   <title>Digitopia</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 
 <body class="pt-5 mt-3">
@@ -258,12 +260,13 @@
     <h1>تواصل معنا الأن</h1>
     <p>تواصل مع خبير</p>
     <div class="content container-fluid">
-      <form class="w-100">
+      <form class="w-100" id="contact-form">
+        <input type="hidden" name="contact_number">
         <div class="input-group">
           <div style="width:97% ;">
-            <label for="full-name">الاسم كاملاً*</label>
+            <label for="full-name">الاسم كاملا*</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="full-name" placeholder="اسمك" />
+              <input type="text" class="form-control" name="user_name" id="full-name" placeholder="اسمك" />
             </div>
           </div>
 
@@ -272,9 +275,9 @@
         <div class="input-group">
 
           <div>
-            <label for="email" class="mt-2">عنوان البريد الالكتروني*</label>
+            <label for="email" class="mt-2">البريد الالكتروني*</label>
             <div class="input-group">
-              <input type="email" class="form-control" id="email" placeholder="البريد الاكتروني الخاص بك">
+              <input type="email" class="form-control" name="user_email" id="email" placeholder="البريد الاكتروني الخاص بك">
             </div>
           </div>
 
@@ -282,17 +285,18 @@
 
             <label for="phone-num" class="mt-2">رقم الهاتف*</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="phone-num" placeholder="رقم الهاتف الخاص بك" required>
+              <input type="text" name="user_number" class="form-control" id="phone-num" placeholder="رقم الهاتف الخاص بك"
+                required>
             </div>
 
           </div>
-
         </div>
         <div class="textarea">
 
-          <label for="message" class="mt-2">كيف يمكننا مساعدتك؟*</label>
+          <label for="message" class="mt-2">كيف يمكننا مساعدتك*</label>
           <div class="input-input-group">
-            <textarea class="form-control" placeholder="أخبرنا عن منتجك وأقرب خططك بشأن المشاركة في التصميم"
+            <textarea class="form-control" name="message"
+              placeholder="Tell us about your product and your nearest plans on the design engagement"
               id="message"></textarea>
           </div>
         </div>
@@ -334,6 +338,29 @@
       </div>
   </footer>
   <!-- Footer End -->
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    document.getElementById("contact-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      emailjs
+        .sendForm(
+          "service_j27dn8i",
+          "template_v0x43h9",
+          e.target,
+          "xCrblYXbOeL82f-PV"
+        )
+        .then(
+          () => {
+            alert("Message Sent");
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    })
+
+  </script>
   <script>
     let navbarSupportedContent = document.getElementById("navbarSupportedContent");
     let button = document.getElementById("button");
